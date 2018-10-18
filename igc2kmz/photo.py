@@ -31,7 +31,10 @@ class Photo(object):
         components = urlparse.urlparse(self.url)
         self.name = os.path.splitext(os.path.basename(components.path))[0]
         if path:
-            file = open(path)
+		try:
+			file = open(path)
+		except:
+			file =urllib2.urlopen(path.replace('/var/www/','http://files.leonardo.pgxc.pl/'))
         else:
             file = urllib2.urlopen(self.url) 
             if file.info().typeheader != 'image/jpeg':
