@@ -35,13 +35,13 @@ from igc2kmz.xc import Coord, Route, Turnpoint, XC
 
 
 DEFAULT_NAME = 'Leonardo'
-DEFAULT_URL = 'http://www.paraglidingforum.com'
-DEFAULT_ICON = '/modules/leonardo/templates/basic/tpl/leonardo_logo.gif'
-DEFAULT_DIRECTORY = '/var/www/html'
+DEFAULT_URL = 'https://leonardo.pgxc.pl'
+DEFAULT_ICON = '/templates/pgxc/tpl/leonardo_logo.gif'
+DEFAULT_DIRECTORY = '/var/www'
 DEFAULT_TABLE_PREFIX = 'leonardo'
 DEFAULT_IGC_PATH = 'data/flights/tracks/%YEAR%/%PILOTID%'
 DEFAULT_PHOTOS_PATH = 'data/flights/photos/%YEAR%/%PILOTID%'
-DEFAULT_PHOTOS_URL = '/modules/leonardo/data/flights/photos/%YEAR%/%PILOTID%'
+DEFAULT_PHOTOS_URL = '/data/flights/photos/%YEAR%/%PILOTID%'
 
 LEAGUE = (None, 'Online Contest', 'World XC Online Contest')
 ROUTE_NAME = (
@@ -53,8 +53,9 @@ ROUTE_NAME = (
         'maximum distance from take-off')
 CIRCUIT = (None, False, True, True, False, False)
 
-SHOW_FLIGHT_URL = '/modules.php?name=leonardo&op=show_flight&flightID=%(ID)d'
-PHOTO_URL = '/modules/leonardo/flights/%(path)s/%(name)s'
+SHOW_FLIGHT_URL = '/lot/%(ID)d'
+#PHOTO_URL = '/modules/leonardo/flights/%(path)s/%(name)s'
+PHOTO_URL = '/data/flights/%(path)s/%(name)s'
 
 B_RECORD_RE = re.compile(r'B(\d{2})(\d{2})(\d{2})'
                          r'(\d{2})(\d{5})([NS])(\d{3})(\d{5})([EW])')
@@ -67,7 +68,8 @@ def substitute(s, dict):
 
 
 def make_banner(options):
-    leonardo_url = options.url + '/modules.php?name=leonardo'
+#    leonardo_url = options.url + '/modules.php?name=leonardo'
+    leonardo_url = options.url 
     icon_url = options.url + options.icon
     icon = kml.Icon(href=icon_url)
     overlay_xy = kml.overlayXY(x=0.5, y=1, xunits='fraction', yunits='fraction')
